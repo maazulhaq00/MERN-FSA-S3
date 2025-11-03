@@ -10,6 +10,11 @@ function AddCategory() {
         description: ""
     })
 
+    const [alert, setAlert] = useState({
+        success: true,
+        message: ""
+    })
+
     const handleCategoryInputChange = (e) => {
         let { name, value } = e.target
         // setCategory({
@@ -23,10 +28,40 @@ function AddCategory() {
             }
         })
     }
-    
+
     const handleCategorySubmit = async () => {
-        const res = await axios.post(`${apiUrl}/categories`, category)
-        console.log(res);
+        try {
+            const res = await axios.post(`${apiUrl}/categories`, category)
+            console.log(res);
+
+            if (res.data.success) {
+                setAlert({
+                    success: true,
+                    message: "Category Added Successfully"
+                })
+            }
+            else {
+                setAlert({
+                    success: false,
+                    message: res.data.message
+                })
+            }
+
+            setCategory({
+                name: "",
+                description: ""
+            })
+
+
+        }
+        catch (err) {
+            console.log(err);
+
+            setAlert({
+                success: false,
+                message: err.response.data.message
+            })
+        }
     }
 
 
@@ -34,6 +69,15 @@ function AddCategory() {
     return (
         <>
             <div className="container my-4">
+
+                {
+                    alert.message && (<div className={`alert ${alert.success ? "alert-success" : "alert-danger"}`} role="alert">
+                        {alert.message}
+                    </div>)
+                }
+
+
+
                 <h3>Add Category</h3>
 
                 <div>
