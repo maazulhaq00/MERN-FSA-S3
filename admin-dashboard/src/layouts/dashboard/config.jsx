@@ -25,6 +25,15 @@ export const items = [
     ),
     label: 'Add Category'
   },
+  {
+    href: '/categories',
+    icon: (
+      <SvgIcon>
+        <ChartPieIcon />
+      </SvgIcon>
+    ),
+    label: 'Dispaly Categories'
+  },
   // {
   //   href: '/orders',
   //   icon: (

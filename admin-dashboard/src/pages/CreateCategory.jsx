@@ -109,7 +109,8 @@ const CreateCategory = () => {
                 >
                   <Card sx={{ p: 3 }}>
                     {
-                      alert.message && <Alert sx={{ mb: 2 }} severity={alert.success ? "success" : "error"}>
+                      alert.message && <Alert sx={{ mb: 2 }} 
+                      severity={alert.success ? "success" : "error"}>
                         {alert.message}
                       </Alert> 
                     }
