@@ -63,7 +63,7 @@ const updateCategory = async (req, res) => {
         const updatedCategory = await Category.findOne({_id: categoryId})
 
 
-        return res.status(200).json({ success: true, updated_category: updatedCategory })
+        return res.status(200).json({ success: true, updated_category: updatedCategory, message: `Category updated successfully`})
     }
     catch (err) {
         return res.status(500).json({ success: false, message: "Internal Server error", error: err })

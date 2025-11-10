@@ -16,14 +16,14 @@ import {
   Typography,
   Unstable_Grid2 as Grid
 } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
-const CreateCategory = () => {
+const EditCategory = () => {
   const apiUrl = "http://localhost:3001"
-
   const navigate = useNavigate()
+  const { id } = useParams()
 
   const [category, setCategory] = useState({
     name: "",
@@ -34,6 +34,33 @@ const CreateCategory = () => {
     success: true,
     message: ""
   })
+
+  const fetchCategory = async () => {
+    try {
+
+      let res = await axios.get(`${apiUrl}/categories/${id}`)
+
+      // console.log(res);
+
+      setCategory(res.data.category)
+
+    }
+    catch (err) {
+      console.log(err);
+
+      setAlert({
+        success: false,
+        message: "Fail to fetch categroy"
+      })
+    }
+
+  }
+
+  useEffect(() => {
+    fetchCategory()
+  }, [])
+
+
 
   const handleCategoryInputChange = (e) => {
     let { name, value } = e.target
@@ -49,34 +76,26 @@ const CreateCategory = () => {
     })
   }
 
-  const handleCategorySubmit = async () => {
-    try {
-      const res = await axios.post(`${apiUrl}/categories`, category)
-      console.log(res);
-      if (res.data.success) {
-        setAlert({
-          success: true,
-          message: "Category Added Successfully"
-        })
+  const handleCategoryEdit = async () => {
 
-        navigate('/categories')
-      }
-      else {
-        setAlert({
-          success: false,
-          message: res.data.message
-        })
-      }
-      setCategory({
-        name: "",
-        description: ""
+    try {
+
+      let res = await axios.put(`${apiUrl}/categories/${id}`, category)
+
+      setAlert({
+        success: res.data.success,
+        message: res.data.message
       })
+
+      navigate('/categories')
+
     }
     catch (err) {
       console.log(err);
+
       setAlert({
         success: false,
-        message: err.response.data.message
+        message: "Fail to update categroy"
       })
     }
   }
@@ -99,7 +118,7 @@ const CreateCategory = () => {
           <Stack spacing={3}>
             <div>
               <Typography variant="h4">
-                Create Category
+                Edit Category
               </Typography>
             </div>
             <div>
@@ -114,10 +133,10 @@ const CreateCategory = () => {
                 >
                   <Card sx={{ p: 3 }}>
                     {
-                      alert.message && <Alert sx={{ mb: 2 }} 
-                      severity={alert.success ? "success" : "error"}>
+                      alert.message && <Alert sx={{ mb: 2 }}
+                        severity={alert.success ? "success" : "error"}>
                         {alert.message}
-                      </Alert> 
+                      </Alert>
                     }
 
                     <Box sx={{ maxWidth: 420 }}>
@@ -148,9 +167,9 @@ const CreateCategory = () => {
                           size="large"
                           type="submit"
                           variant="contained"
-                          onClick={handleCategorySubmit}
+                          onClick={handleCategoryEdit}
                         >
-                          Add Category
+                          Update Category
                         </Button>
                       </Box>
                     </Box>
@@ -165,4 +184,4 @@ const CreateCategory = () => {
   );
 };
 
-export default CreateCategory;
+export default EditCategory;
