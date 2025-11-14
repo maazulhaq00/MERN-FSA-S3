@@ -49,7 +49,6 @@ const CreateProduct = () => {
       console.log(res);
 
       setCategories(res.data.categories)
-
     }
     catch (err) {
       console.log(err);
@@ -58,7 +57,6 @@ const CreateProduct = () => {
         success: false,
         message: "Fail to fetch categories"
       })
-
     }
   }
 
@@ -90,7 +88,7 @@ const CreateProduct = () => {
           message: "Product Added Successfully"
         })
 
-        // navigate('/products')
+        navigate('/products')
       }
       else {
         setAlert({
@@ -191,7 +189,8 @@ const CreateProduct = () => {
                         />
   
                         <FormControl sx={{ m: 1, minWidth: 120 }}>
-                          <InputLabel id="demo-simple-select-helper-label">Product Category</InputLabel>
+                          <InputLabel id="demo-simple-select-helper-label">
+                          Product Category</InputLabel>
                           <Select
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
@@ -202,7 +201,8 @@ const CreateProduct = () => {
                           >
                              {
                               categories.map((cat) => {
-                                return <MenuItem key={cat._id} value={cat._id}>{cat.name}</MenuItem>
+                                return <MenuItem key={cat._id} value={cat._id}>
+                                  {cat.name}</MenuItem>
                               })
                             }
                             

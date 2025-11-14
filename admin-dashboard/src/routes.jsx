@@ -10,6 +10,7 @@ import CreateCategory from './pages/CreateCategory';
 import DisplayCategories from './pages/DisplayCategories';
 import EditCategory from './pages/EditCategory';
 import CreateProduct from './pages/CreateProduct';
+import DisplayProducts from './pages/DisplayProducts';
 
 export const routes = [
   {
@@ -32,12 +33,16 @@ export const routes = [
         element: <DisplayCategories />
       },
       {
+        path: 'edit-category/:id',
+        element: <EditCategory />
+      },
+      {
         path: 'add-product',
         element: <CreateProduct />
       },
       {
-        path: 'edit-category/:id',
-        element: <EditCategory />
+        path: 'products',
+        element: <DisplayProducts />
       },
       //old routes
       {

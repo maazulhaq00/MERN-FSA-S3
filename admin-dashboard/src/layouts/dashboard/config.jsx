@@ -43,6 +43,15 @@ export const items = [
     ),
     label: 'Add Product'
   },
+  {
+    href: '/products',
+    icon: (
+      <SvgIcon>
+        <ChartPieIcon />
+      </SvgIcon>
+    ),
+    label: 'Dispaly Products'
+  },
   // {
   //   href: '/orders',
   //   icon: (
