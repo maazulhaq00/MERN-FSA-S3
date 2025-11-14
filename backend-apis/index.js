@@ -4,6 +4,7 @@ import connectToDB from './config/connectToDb.js'
 import cors from "cors"
 
 import categoryRouter from './routers/categoryRouter.js'
+import productRouter from './routers/productRouter.js'
 
 dotenv.config()
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/categories", categoryRouter)
+app.use("/products", productRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`App running: http://localhost:${process.env.PORT}`);

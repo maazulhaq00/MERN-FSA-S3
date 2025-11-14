@@ -9,6 +9,7 @@ import ThemePage from './pages1/theme';
 import CreateCategory from './pages/CreateCategory';
 import DisplayCategories from './pages/DisplayCategories';
 import EditCategory from './pages/EditCategory';
+import CreateProduct from './pages/CreateProduct';
 
 export const routes = [
   {
@@ -29,6 +30,10 @@ export const routes = [
       {
         path: 'categories',
         element: <DisplayCategories />
+      },
+      {
+        path: 'add-product',
+        element: <CreateProduct />
       },
       {
         path: 'edit-category/:id',
