@@ -66,21 +66,39 @@ const CreateProduct = () => {
 
   const handleProductInputChange = (e) => {
     let { name, value } = e.target
-    // setCategory({
-    //     ...category,
-    //     [name]: value
-    // })
+
     setProduct((prev) => {
       return {
         ...prev,
         [name]: value
       }
     })
+    
+  }
+  const handleProductImageInputChange = (e) => {
+    
+    let { name, files } = e.target
+    
+    setProduct((prev) => {
+      return {
+        ...prev,
+        [name]: files[0]
+      }
+    })
   }
 
   const handleProductSubmit = async () => {
     try {
-      const res = await axios.post(`${apiUrl}/products`, product)
+      let formData = new FormData();
+
+      formData.append("name", product.name)
+      formData.append("description", product.description)
+      formData.append("price", product.price)
+      formData.append("image", product.image)
+      formData.append("category", product.category)
+
+      const res = await axios.post(`${apiUrl}/products`, formData)
+      
       console.log(res);
       if (res.data.success) {
         setAlert({
@@ -180,11 +198,12 @@ const CreateProduct = () => {
 
                         />
                         <TextField
+                          type='file'
                           fullWidth
                           label="Product Image"
                           name="image"
-                          value={product.image}
-                          onChange={handleProductInputChange}
+                          // value={product.image}
+                          onChange={handleProductImageInputChange}
 
                         />
   

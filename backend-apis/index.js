@@ -5,12 +5,15 @@ import cors from "cors"
 
 import categoryRouter from './routers/categoryRouter.js'
 import productRouter from './routers/productRouter.js'
+import authRouter from './routers/authRouter.js'
+
 
 dotenv.config()
 
 const app = express()
 app.use(express.json())
 app.use(cors());
+app.use(express.static('public'))
 
 connectToDB();
 
@@ -21,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/categories", categoryRouter)
 app.use("/products", productRouter)
+app.use(authRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`App running: http://localhost:${process.env.PORT}`);

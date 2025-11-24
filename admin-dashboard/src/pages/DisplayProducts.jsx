@@ -149,7 +149,12 @@ const DisplayProducts = () => {
                                 <TableCell>{prod.name}</TableCell>
                                 <TableCell>{prod.description}</TableCell>
                                 <TableCell>{prod.price}</TableCell>
-                                <TableCell>{prod.image}</TableCell>
+                                <TableCell>
+                                  
+                                  <img src={`${apiUrl}/uploads/${prod.image}`}
+                                   width="200" alt="" />
+
+                                </TableCell>
                                 <TableCell>{prod.category.name}</TableCell>
                                 <TableCell>
                                   <Stack direction="row" spacing={1}>

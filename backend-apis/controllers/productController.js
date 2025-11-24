@@ -4,7 +4,9 @@ const createProduct = async (req, res) => {
 
     try {
 
-        let { name, description, price, image, category } = req.body
+        let { name, description, price, category } = req.body
+
+        let image = req.file.filename
 
         // const category = await Category.create({name: name, description: description})
         const product = await Product.create({ name, description, price, image, category })
@@ -12,6 +14,7 @@ const createProduct = async (req, res) => {
         return res.status(201).json({ success: true, product })
     }
     catch (err) {
+        console.log(err)
         return res.status(500).json({ success: false, message: "Internal Server error", error: err })
     }
 }
@@ -50,8 +53,10 @@ const updateProduct = async (req, res) => {
         }
 
 
-        let { name, description, price, image, category } = req.body
+        let { name, description, price, category } = req.body
 
+        let image = req.file.filename
+        
         await Product.findByIdAndUpdate(productId, { name, description, price, image, category  });
 
         const updatedProduct = await Product.findOne({ _id: productId })
