@@ -15,7 +15,7 @@ const createCategory = async (req, res) => {
         // const category = await Category.create({name: name, description: description})
         const category = await Category.create({ name, description })
 
-        return res.status(201).json({ success: true, category })
+        return res.status(201).json({ success: true, category})
     }
     catch (err) {
         return res.status(500).json({ success: false, message: "Internal Server error", error: err })
