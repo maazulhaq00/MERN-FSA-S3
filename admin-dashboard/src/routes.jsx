@@ -11,8 +11,14 @@ import DisplayCategories from './pages/DisplayCategories';
 import EditCategory from './pages/EditCategory';
 import CreateProduct from './pages/CreateProduct';
 import DisplayProducts from './pages/DisplayProducts';
+import { element } from 'prop-types';
+import Login from './pages/login';
 
 export const routes = [
+  {
+    path:"/login",
+    element: <Login />
+  },
   {
     element: (
       <DashboardLayout>
@@ -63,6 +69,7 @@ export const routes = [
       }
     ]
   },
+  
   {
     path: '404',
     element: <NotFoundPage />

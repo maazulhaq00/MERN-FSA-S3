@@ -51,7 +51,12 @@ const CreateCategory = () => {
 
   const handleCategorySubmit = async () => {
     try {
-      const res = await axios.post(`${apiUrl}/categories`, category)
+      let token = localStorage.getItem("token")
+      const res = await axios.post(`${apiUrl}/categories`, category, {
+        headers: {
+          "authorization": token
+        }
+      })
       console.log(res);
       if (res.data.success) {
         setAlert({
