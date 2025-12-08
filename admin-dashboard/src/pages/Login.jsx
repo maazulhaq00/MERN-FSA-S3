@@ -53,6 +53,7 @@ const Login = () => {
             if (res.data.success) {
 
                 localStorage.setItem("token", res.data.token)
+                localStorage.setItem("role", res.data.role)
 
                 if (res.data.role == "admin") {
                     navigate("/add-category")

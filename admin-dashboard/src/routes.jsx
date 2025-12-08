@@ -13,17 +13,20 @@ import CreateProduct from './pages/CreateProduct';
 import DisplayProducts from './pages/DisplayProducts';
 import { element } from 'prop-types';
 import Login from './pages/login';
+import AdminProtectedRoute from './auth/AdminProtectedRoute';
 
 export const routes = [
   {
-    path:"/login",
+    path: "/login",
     element: <Login />
   },
   {
     element: (
-      <DashboardLayout>
-        <Outlet />
-      </DashboardLayout>
+      <AdminProtectedRoute>
+        <DashboardLayout>
+          <Outlet />
+        </DashboardLayout>
+      </AdminProtectedRoute>
     ),
     children: [
       {
@@ -69,7 +72,7 @@ export const routes = [
       }
     ]
   },
-  
+
   {
     path: '404',
     element: <NotFoundPage />
